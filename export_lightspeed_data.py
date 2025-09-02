@@ -253,7 +253,9 @@ def export_all_data():
                         customer_stream = client.stream_paginated_data('customers', start_page=start_page,
                                                                      checkpoint_callback=checkpoint_callback)
                         
-                        total_customers = exporter.stream_export_customers(customer_stream)
+                        # Check if we're resuming (start_page > 1 means we have partial progress)
+                        is_resuming = start_page > 1
+                        total_customers = exporter.stream_export_customers(customer_stream, is_resuming)
                         
                         checkpoint_manager.mark_endpoint_complete("customers")
                         checkpoint_manager.clear_partial_progress("customers")
@@ -296,7 +298,8 @@ def export_all_data():
             
             if not shutdown_requested:
                 # Use streaming export for products
-                total_products = exporter.stream_export_products(product_stream)
+                is_resuming = start_page > 1
+                total_products = exporter.stream_export_products(product_stream, is_resuming)
                 
                 # For variants, we still need to collect all products since variants are extracted from product data
                 # TODO: This could be optimized to stream variants as well in future versions
@@ -332,7 +335,8 @@ def export_all_data():
             
             if not shutdown_requested:
                 # Use streaming export for sales
-                total_sales = exporter.stream_export_sales(sales_stream)
+                is_resuming = start_page > 1
+                total_sales = exporter.stream_export_sales(sales_stream, is_resuming)
                 
                 # For line items and payments, we still need all sales data
                 # TODO: This could be optimized to stream these as well in future versions

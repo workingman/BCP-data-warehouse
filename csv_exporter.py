@@ -102,7 +102,8 @@ class CSVExporter:
         
         logger.debug(f"Appended {len(data)} records to {filepath}")
     
-    def stream_export_data(self, filename: str, fieldnames: List[str], data_stream):
+    def stream_export_data(self, filename: str, fieldnames: List[str], data_stream, 
+                          is_resuming: bool = False):
         """
         Export data using streaming approach - writes each chunk as it arrives
         
@@ -110,12 +111,19 @@ class CSVExporter:
             filename: Name of CSV file
             fieldnames: List of field names for CSV header
             data_stream: Iterator/generator that yields chunks of data
+            is_resuming: Whether we're resuming an interrupted export
         
         Returns:
             Total number of records written
         """
-        # Initialize CSV file with headers
-        self._init_csv_file(filename, fieldnames)
+        filepath = self.export_dir / filename
+        
+        # Only initialize new file if not resuming or file doesn't exist
+        if not is_resuming or not filepath.exists():
+            self._init_csv_file(filename, fieldnames)
+            logger.info(f"Initialized new CSV file: {filepath}")
+        else:
+            logger.info(f"Appending to existing CSV file: {filepath}")
         
         total_records = 0
         for chunk in data_stream:
@@ -136,7 +144,7 @@ class CSVExporter:
         ]
         self._write_csv('customers.csv', customers, fieldnames)
     
-    def stream_export_customers(self, data_stream):
+    def stream_export_customers(self, data_stream, is_resuming: bool = False):
         """Stream export customer data"""
         fieldnames = [
             'id', 'customer_code', 'first_name', 'last_name', 'email', 
@@ -144,7 +152,7 @@ class CSVExporter:
             'enable_loyalty', 'loyalty_balance', 'note', 'gender',
             'date_of_birth', 'created_at', 'updated_at'
         ]
-        return self.stream_export_data('customers.csv', fieldnames, data_stream)
+        return self.stream_export_data('customers.csv', fieldnames, data_stream, is_resuming)
     
     def export_customer_groups(self, groups: List[Dict]):
         """Export customer group data"""
@@ -161,7 +169,7 @@ class CSVExporter:
         ]
         self._write_csv('products.csv', products, fieldnames)
     
-    def stream_export_products(self, data_stream):
+    def stream_export_products(self, data_stream, is_resuming: bool = False):
         """Stream export product data"""
         fieldnames = [
             'id', 'source_id', 'handle', 'sku', 'name', 'description',
@@ -169,7 +177,7 @@ class CSVExporter:
             'retail_price', 'tag_string', 'is_active', 'track_inventory',
             'created_at', 'updated_at'
         ]
-        return self.stream_export_data('products.csv', fieldnames, data_stream)
+        return self.stream_export_data('products.csv', fieldnames, data_stream, is_resuming)
     
     def export_product_variants(self, products: List[Dict]):
         """Export product variants from product data"""
@@ -213,7 +221,7 @@ class CSVExporter:
         ]
         self._write_csv('sales.csv', sales, fieldnames)
     
-    def stream_export_sales(self, data_stream):
+    def stream_export_sales(self, data_stream, is_resuming: bool = False):
         """Stream export sales data"""
         fieldnames = [
             'id', 'source_id', 'outlet_id', 'register_id', 'user_id',
@@ -221,7 +229,7 @@ class CSVExporter:
             'note', 'total_price', 'total_tax', 'total_discount',
             'total_loyalty', 'created_at', 'updated_at', 'sale_date'
         ]
-        return self.stream_export_data('sales.csv', fieldnames, data_stream)
+        return self.stream_export_data('sales.csv', fieldnames, data_stream, is_resuming)
     
     def export_sale_items(self, sales: List[Dict]):
         """Export sale line items from sales data"""
