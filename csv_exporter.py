@@ -11,22 +11,30 @@ logger = logging.getLogger(__name__)
 class CSVExporter:
     """Export Lightspeed data to CSV files"""
     
-    def __init__(self, output_dir: str = "./exports"):
+    def __init__(self, output_dir: str = "./exports", resume_export_dir: Optional[str] = None):
         """
         Initialize CSV exporter
         
         Args:
             output_dir: Directory to save CSV files
+            resume_export_dir: Existing export directory to resume from
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
-        # Add timestamp to prevent overwriting
-        self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self.export_dir = self.output_dir / self.timestamp
-        self.export_dir.mkdir(parents=True, exist_ok=True)
+        if resume_export_dir:
+            # Resume existing export
+            self.export_dir = Path(resume_export_dir)
+            self.timestamp = self.export_dir.name
+            logger.info(f"Resuming export in: {self.export_dir}")
+        else:
+            # Create new export directory
+            self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            self.export_dir = self.output_dir / self.timestamp
+            self.export_dir.mkdir(parents=True, exist_ok=True)
+            logger.info(f"Starting new export in: {self.export_dir}")
     
-    def _write_csv(self, filename: str, data: List[Dict], fieldnames: List[str]):
+    def _write_csv(self, filename: str, data: List[Dict], fieldnames: List[str], append: bool = False):
         """
         Write data to CSV file
         
@@ -34,6 +42,7 @@ class CSVExporter:
             filename: Name of CSV file
             data: List of dictionaries to write
             fieldnames: List of field names for CSV header
+            append: Whether to append to existing file or overwrite
         """
         filepath = self.export_dir / filename
         
@@ -41,12 +50,81 @@ class CSVExporter:
             logger.warning(f"No data to export for {filename}")
             return
         
+        # Check if file exists when appending
+        file_exists = filepath.exists() if append else False
+        mode = 'a' if append else 'w'
+        
+        with open(filepath, mode, newline='', encoding='utf-8') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames, extrasaction='ignore')
+            
+            # Write header only if file is new or doesn't exist
+            if not file_exists:
+                writer.writeheader()
+            
+            writer.writerows(data)
+        
+        action = "Appended" if append else "Exported"
+        logger.info(f"{action} {len(data)} records to {filepath}")
+    
+    def _init_csv_file(self, filename: str, fieldnames: List[str]):
+        """
+        Initialize CSV file with headers for streaming
+        
+        Args:
+            filename: Name of CSV file
+            fieldnames: List of field names for CSV header
+        """
+        filepath = self.export_dir / filename
+        
         with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames, extrasaction='ignore')
             writer.writeheader()
+        
+        logger.info(f"Initialized CSV file: {filepath}")
+    
+    def _append_csv_chunk(self, filename: str, data: List[Dict], fieldnames: List[str]):
+        """
+        Append a chunk of data to an existing CSV file
+        
+        Args:
+            filename: Name of CSV file
+            data: List of dictionaries to append
+            fieldnames: List of field names for CSV header
+        """
+        if not data:
+            return
+            
+        filepath = self.export_dir / filename
+        
+        with open(filepath, 'a', newline='', encoding='utf-8') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames, extrasaction='ignore')
             writer.writerows(data)
         
-        logger.info(f"Exported {len(data)} records to {filepath}")
+        logger.debug(f"Appended {len(data)} records to {filepath}")
+    
+    def stream_export_data(self, filename: str, fieldnames: List[str], data_stream):
+        """
+        Export data using streaming approach - writes each chunk as it arrives
+        
+        Args:
+            filename: Name of CSV file
+            fieldnames: List of field names for CSV header
+            data_stream: Iterator/generator that yields chunks of data
+        
+        Returns:
+            Total number of records written
+        """
+        # Initialize CSV file with headers
+        self._init_csv_file(filename, fieldnames)
+        
+        total_records = 0
+        for chunk in data_stream:
+            if chunk:  # Only write non-empty chunks
+                self._append_csv_chunk(filename, chunk, fieldnames)
+                total_records += len(chunk)
+        
+        logger.info(f"Streamed {total_records} total records to {filename}")
+        return total_records
     
     def export_customers(self, customers: List[Dict]):
         """Export customer data"""
@@ -57,6 +135,16 @@ class CSVExporter:
             'date_of_birth', 'created_at', 'updated_at'
         ]
         self._write_csv('customers.csv', customers, fieldnames)
+    
+    def stream_export_customers(self, data_stream):
+        """Stream export customer data"""
+        fieldnames = [
+            'id', 'customer_code', 'first_name', 'last_name', 'email', 
+            'phone', 'mobile', 'company_name', 'customer_group_id',
+            'enable_loyalty', 'loyalty_balance', 'note', 'gender',
+            'date_of_birth', 'created_at', 'updated_at'
+        ]
+        return self.stream_export_data('customers.csv', fieldnames, data_stream)
     
     def export_customer_groups(self, groups: List[Dict]):
         """Export customer group data"""
@@ -72,6 +160,16 @@ class CSVExporter:
             'created_at', 'updated_at'
         ]
         self._write_csv('products.csv', products, fieldnames)
+    
+    def stream_export_products(self, data_stream):
+        """Stream export product data"""
+        fieldnames = [
+            'id', 'source_id', 'handle', 'sku', 'name', 'description',
+            'brand_id', 'supplier_id', 'product_type_id', 'supply_price',
+            'retail_price', 'tag_string', 'is_active', 'track_inventory',
+            'created_at', 'updated_at'
+        ]
+        return self.stream_export_data('products.csv', fieldnames, data_stream)
     
     def export_product_variants(self, products: List[Dict]):
         """Export product variants from product data"""
@@ -114,6 +212,16 @@ class CSVExporter:
             'total_loyalty', 'created_at', 'updated_at', 'sale_date'
         ]
         self._write_csv('sales.csv', sales, fieldnames)
+    
+    def stream_export_sales(self, data_stream):
+        """Stream export sales data"""
+        fieldnames = [
+            'id', 'source_id', 'outlet_id', 'register_id', 'user_id',
+            'customer_id', 'invoice_number', 'receipt_number', 'status',
+            'note', 'total_price', 'total_tax', 'total_discount',
+            'total_loyalty', 'created_at', 'updated_at', 'sale_date'
+        ]
+        return self.stream_export_data('sales.csv', fieldnames, data_stream)
     
     def export_sale_items(self, sales: List[Dict]):
         """Export sale line items from sales data"""

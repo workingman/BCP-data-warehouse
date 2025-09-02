@@ -54,55 +54,96 @@ class LightspeedClient:
             logger.error(f"API request failed for {endpoint}: {str(e)}")
             raise
     
-    def get_paginated_data(self, endpoint: str, params: Optional[Dict] = None) -> List[Dict]:
+    def get_paginated_data(self, endpoint: str, params: Optional[Dict] = None, 
+                          start_page: int = 1, checkpoint_callback=None) -> List[Dict]:
         """
-        Fetch all pages of data from a paginated endpoint
+        Fetch all pages of data from a paginated endpoint (legacy method - buffers all data)
         
         Args:
             endpoint: API endpoint path
             params: Initial query parameters
+            start_page: Page to start from (for resuming)
+            checkpoint_callback: Function to call after each page for checkpointing
             
         Returns:
             List of all records from all pages
         """
+        all_data = []
+        for page_data in self.stream_paginated_data(endpoint, params, start_page, checkpoint_callback):
+            all_data.extend(page_data)
+        return all_data
+    
+    def stream_paginated_data(self, endpoint: str, params: Optional[Dict] = None, 
+                             start_page: int = 1, checkpoint_callback=None, 
+                             data_callback=None):
+        """
+        Stream paginated data from an endpoint, yielding each page as it's fetched
+        
+        Args:
+            endpoint: API endpoint path
+            params: Initial query parameters
+            start_page: Page to start from (for resuming)
+            checkpoint_callback: Function to call after each page for checkpointing
+            data_callback: Function to call with each page of data for streaming processing
+            
+        Yields:
+            List of records from each page
+        """
         if params is None:
             params = {}
         
-        all_data = []
-        page = 1
+        page = start_page
+        total_records = 0
         
-        while True:
-            params['page'] = page
-            params['page_size'] = 200  # Max page size for most endpoints
-            
-            logger.info(f"Fetching {endpoint} page {page}")
-            response = self._make_request(endpoint, params)
-            
-            # Handle different response structures
-            if 'data' in response:
-                data = response['data']
-            elif endpoint in response:
-                data = response[endpoint]
-            else:
-                # Some endpoints return the array directly
-                data = response if isinstance(response, list) else []
-            
-            if not data:
-                break
+        try:
+            while True:
+                params['page'] = page
+                params['page_size'] = 200  # Max page size for most endpoints
                 
-            all_data.extend(data)
-            
-            # Check for more pages
-            if 'pagination' in response:
-                if response['pagination']['page'] >= response['pagination']['pages']:
+                logger.info(f"Fetching {endpoint} page {page}")
+                response = self._make_request(endpoint, params)
+                
+                # Handle different response structures
+                if 'data' in response:
+                    data = response['data']
+                elif endpoint in response:
+                    data = response[endpoint]
+                else:
+                    # Some endpoints return the array directly
+                    data = response if isinstance(response, list) else []
+                
+                if not data:
                     break
-            elif len(data) < params['page_size']:
-                break
                 
-            page += 1
+                total_records += len(data)
+                
+                # Call data callback for streaming processing
+                if data_callback:
+                    data_callback(data, page, total_records)
+                
+                # Yield the page data for streaming
+                yield data
+                
+                # Call checkpoint callback if provided
+                if checkpoint_callback:
+                    checkpoint_callback(endpoint, page, total_records)
+                
+                # Check for more pages
+                if 'pagination' in response:
+                    if response['pagination']['page'] >= response['pagination']['pages']:
+                        break
+                elif len(data) < params['page_size']:
+                    break
+                    
+                page += 1
+                
+        except KeyboardInterrupt:
+            logger.info(f"Export interrupted at {endpoint} page {page}")
+            if checkpoint_callback:
+                checkpoint_callback(endpoint, page - 1, total_records)  # Save progress before interruption
+            raise
             
-        logger.info(f"Fetched {len(all_data)} records from {endpoint}")
-        return all_data
+        logger.info(f"Streamed {total_records} records from {endpoint}")
     
     # Customer endpoints
     def get_customers(self) -> List[Dict]:

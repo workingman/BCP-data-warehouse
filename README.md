@@ -31,14 +31,33 @@ pip install -r requirements.txt
 Run the export script:
 
 ```bash
-python export_lightspeed_data.py
+python3 export_lightspeed_data.py
 ```
 
+### Features
+
+- **Interruptible**: Press `Ctrl+C` to safely stop the export at any time
+- **Resumable**: Restart the script to continue from where you left off
+- **Progress tracking**: Real-time progress bars and checkpoint saving
+- **Error handling**: Continues export even if individual endpoints fail
+
+### Export Process
+
 The script will:
-- Connect to your Lightspeed account via API
-- Download all available POS data
-- Export data to CSV files in `./exports/[timestamp]/`
-- Create a log file for the export session
+1. Check for incomplete exports and offer to resume them
+2. Connect to your Lightspeed account via API
+3. Download all available POS data with progress tracking
+4. Export data to CSV files in `./exports/[timestamp]/`
+5. Save checkpoints after each completed endpoint
+6. Create detailed log files for troubleshooting
+
+### Resuming Interrupted Exports
+
+If an export is interrupted:
+- Your progress is automatically saved
+- Run the script again to see resume options
+- Choose to continue an existing export or start fresh
+- The script will skip completed endpoints and resume from where it stopped
 
 ## Exported Data
 
