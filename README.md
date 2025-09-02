@@ -1,79 +1,72 @@
-# lspd-export
+# BCP Data Warehouse
 
-Export your Lightspeed X-Series POS data to CSV files for database import.
+A comprehensive data warehouse project for BC Playthings, consolidating historical data from three different Point of Sale systems.
 
-## Installation
+## Project Overview
 
-```bash
-# Clone the repository
-git clone https://github.com/workingman/lspd-export.git
-cd lspd-export
+BC Playthings has used three different POS systems over its history:
+1. **AmberPOS** (earliest) - Data available in Excel format
+2. **Lightspeed X-Series** (2022-2024) - Data extracted via API
+3. **Odoo** (current) - Active system with ongoing data
 
-# Install dependencies
-pip install -r requirements.txt
+This project creates a unified data warehouse that allows historical analysis across all three systems.
+
+## Directory Structure
+
+```
+BCP-data-warehouse/
+├── amber/          # AmberPOS data analysis and extraction
+├── lightspeed/     # Lightspeed X-Series data extraction (completed)
+├── odoo/          # Odoo data analysis and extraction
+├── warehouse/     # Unified data warehouse schema and ETL
+└── analysis/      # Cross-system analysis and reporting
 ```
 
-## Configuration
+## Project Status
 
-1. Copy `.env.example` to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
+### ✅ Lightspeed X-Series (COMPLETED)
+- **37,057 records exported** across 17 endpoints
+- **Audit verified** - 100% data consistency confirmed
+- **Complete business data**: Products (8,301), Customers (2,265), Sales (19,944)
+- **Export format**: JSONL files with CSV conversion available
 
-2. Edit `.env` with your Lightspeed credentials:
-   - `LIGHTSPEED_DOMAIN`: Your store domain (e.g., `store.retail.lightspeed.app`)
-   - `LIGHTSPEED_TOKEN`: Your personal access token from Lightspeed
+### 🔄 AmberPOS (NEXT)
+- Excel data analysis and standardization
+- Schema mapping to align with Lightspeed structure
 
-**⚠️ IMPORTANT**: Never commit your `.env` file to version control!
+### 🔄 Odoo (PENDING)
+- Current system data extraction
+- Real-time integration planning
 
-## Usage
+### 🔄 Data Warehouse (FUTURE)
+- Unified schema design across all three systems
+- ETL processes for data consolidation
+- Historical timeline reconciliation
+- Cross-system analytics capability
 
-Run the export script:
+## Key Business Data
 
-```bash
-python3 export_lightspeed_data.py
-```
+The most critical data for historical analysis:
+- **Sales transactions** (revenue analysis across all systems)
+- **Product catalog** (SKU evolution and product lifecycle)
+- **Customer data** (customer journey across systems)
+- **Inventory movements** (operational history)
 
-### Features
+## Technology Stack
 
-- **Interruptible**: Press `Ctrl+C` to safely stop the export at any time
-- **Resumable**: Restart the script to continue from where you left off
-- **Progress tracking**: Real-time progress bars and checkpoint saving
-- **Error handling**: Continues export even if individual endpoints fail
+- **Data Extraction**: Python scripts with API integration
+- **Data Format**: JSONL for flexibility, CSV for compatibility
+- **Data Storage**: TBD (PostgreSQL, SQLite, or cloud solution)
+- **Version Control**: Git for all scripts and schema definitions
 
-### Export Process
+## Getting Started
 
-The script will:
-1. Check for incomplete exports and offer to resume them
-2. Connect to your Lightspeed account via API
-3. Download all available POS data with progress tracking
-4. Export data to CSV files in `./exports/[timestamp]/`
-5. Save checkpoints after each completed endpoint
-6. Create detailed log files for troubleshooting
+Each subdirectory contains specific instructions for that POS system. Start with the system you need to analyze:
 
-### Resuming Interrupted Exports
+- `lightspeed/README.md` - Lightspeed data extraction (complete)
+- `amber/README.md` - AmberPOS data analysis (upcoming)
+- `odoo/README.md` - Odoo data extraction (upcoming)
 
-If an export is interrupted:
-- Your progress is automatically saved
-- Run the script again to see resume options
-- Choose to continue an existing export or start fresh
-- The script will skip completed endpoints and resume from where it stopped
+## Timeline
 
-## Exported Data
-
-The following CSV files will be created:
-- **Sales**: `sales.csv`, `sale_items.csv`, `sale_payments.csv`
-- **Products**: `products.csv`, `product_variants.csv`, `inventory.csv`
-- **Customers**: `customers.csv`, `customer_groups.csv`
-- **Operations**: `outlets.csv`, `registers.csv`, `users.csv`
-- **Financial**: `taxes.csv`, `payment_types.csv`
-- **Suppliers**: `suppliers.csv`, `brands.csv`, `product_types.csv`
-- And more...
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+This project represents BC Playthings' complete POS history from the earliest AmberPOS records through the current Odoo implementation, enabling comprehensive business intelligence and historical trend analysis.

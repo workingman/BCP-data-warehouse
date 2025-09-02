@@ -1,0 +1,555 @@
+{
+  "products": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "products"
+    },
+    "total_records": 8301,
+    "samples": [
+      {
+        "id": "30cd6fd5-0ddc-4d7b-b7d0-65b1e06a0622",
+        "source_id": null,
+        "source_variant_id": null,
+        "variant_parent_id": null,
+        "family_id": "eba61ae9-1ae4-4420-a36f-903c3102b271",
+        "name": "Land of Dough Counter Display - 7oz tubs",
+        "variant_name": "Land of Dough Counter Display - 7oz tubs",
+        "handle": "land-of-dough-counter-display---7oz-tubs",
+        "sku": "16268",
+        "supplier_code": null,
+        "active": true,
+        "ecwid_enabled_webstore": false,
+        "has_inventory": true,
+        "is_composite": false,
+        "description": "<p><span style=\"font-size: small; font-family:  sans-serif;\"> &bull; All-natural wheat dough and colours, compostable glitters, and calming essential oils.</span></p><p><span style=\"font-size: small; font-family:  sans-serif;\">&bull; Eco-friendly packaging.</span></p><p><span style=\"font-size: small; font-family:  sans-serif;\">&bull; Includes a natural, sustainably sourced birch wood shovel.</span></p><p><span style=\"font-size: small; font-family:  sans-serif;\">&bull; Air dries for sculpting. For a longer-lasting dough: keep sealed in product packaging and place in a cool dry place. </span></p><p><span style=\"font-size: small; font-family:  sans-serif;\">&bull; Handcrafted in the USA </span></p><p><span style=\"font-size: small; font-family:  sans-serif;\">&bull; For 3 yrs+ </span></p><p><span style=\"font-size: small; font-family:  sans-serif;\">Warning: Choking Hazard. Contains small parts as well as wheat and almond oil. Not for eating.</span></p>",
+        "image_url": "https://secure.vendhq.com/images/placeholder/product/no-image-white-standard.png",
+        "created_at": "2023-07-28T23:05:41+00:00",
+        "updated_at": "2025-06-27T10:46:59+00:00",
+        "deleted_at": null,
+        "source": "USER",
+        "account_code": null,
+        "account_code_purchase": null,
+        "supply_price": 9.9,
+        "version": 42066881298,
+        "type": {
+          "id": "73775dca-f236-4891-afa4-0fbba8b03bfe",
+          "name": "Arts & Crafts",
+          "deleted_at": null,
+          "version": 25158826944
+        },
+        "product_category": {
+          "id": "73775dca-f236-4891-afa4-0fbba8b03bfe",
+          "name": "Arts & Crafts",
+          "leaf_category": true,
+          "category_path": [
+            {
+              "id": "73775dca-f236-4891-afa4-0fbba8b03bfe",
+              "name": "Arts & Crafts"
+            }
+          ]
+        },
+        "supplier": {
+          "id": "a3d8f90d-9df8-4e4d-a249-a8d716cde2ee",
+          "name": "Crazy Aaron Enterprises Inc.",
+          "source": "USER",
+          "description": "",
+          "deleted_at": null,
+          "version": 25158829806
+        },
+        "brand": {
+          "id": "0ac54c19-8c39-11ed-fd4a-895a391c4fba",
+          "name": "Land of Dough",
+          "description": null,
+          "deleted_at": null,
+          "version": 26577269716
+        },
+        "variant_options": [],
+        "categories": [],
+        "images": [],
+        "skuImages": [],
+        "has_variants": false,
+        "variant_count": null,
+        "button_order": 0,
+        "price_including_tax": 21.99,
+        "price_excluding_tax": 21.99,
+        "loyalty_amount": null,
+        "product_codes": [
+          {
+            "id": "00f6ba19-a07b-4693-8850-acb109da2fd6",
+            "type": "CUSTOM",
+            "code": "16268"
+          }
+        ],
+        "product_suppliers": [
+          {
+            "id": "0d96e16c-e8e8-4c2b-b94f-9b42d7c5dd56",
+            "product_id": "30cd6fd5-0ddc-4d7b-b7d0-65b1e06a0622",
+            "supplier_id": "a3d8f90d-9df8-4e4d-a249-a8d716cde2ee",
+            "supplier_name": "Crazy Aaron Enterprises Inc.",
+            "code": null,
+            "price": 9.9
+          }
+        ],
+        "packaging": {
+          "made_from": [],
+          "breaks_into": []
+        },
+        "weight": 0.4,
+        "weight_unit": "KG",
+        "length": 11.0,
+        "width": 11.0,
+        "height": 11.0,
+        "dimensions_unit": "CM",
+        "attributes": [],
+        "brand_id": "0ac54c19-8c39-11ed-fd4a-895a391c4fba",
+        "product_type_id": "73775dca-f236-4891-afa4-0fbba8b03bfe",
+        "supplier_id": "a3d8f90d-9df8-4e4d-a249-a8d716cde2ee",
+        "is_active": true,
+        "image_thumbnail_url": "https://secure.vendhq.com/images/placeholder/product/no-image-white-thumb.png",
+        "tag_ids": [],
+        "_exported_at": "2025-09-02T03:18:11.472796"
+      }
+    ]
+  },
+  "customers": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "customers"
+    },
+    "total_records": 2265,
+    "samples": [
+      {
+        "name": "Jo Ditlove",
+        "id": "062791b7-dd39-11ee-eaf5-fd0d13cd1955",
+        "customer_code": "Jo-R37U",
+        "source_unique_id": null,
+        "first_name": "Jo",
+        "last_name": "Ditlove",
+        "email": "Jo@ditlove.ca",
+        "year_to_date": 0.0,
+        "balance": 0.0,
+        "loyalty_balance": 0.0,
+        "on_account_limit": 0.0,
+        "note": null,
+        "gender": null,
+        "date_of_birth": null,
+        "company_name": null,
+        "do_not_email": true,
+        "loyalty_email_sent": false,
+        "phone": null,
+        "mobile": "778 228 5703",
+        "fax": null,
+        "twitter": null,
+        "website": null,
+        "physical_address_1": null,
+        "physical_address_2": null,
+        "physical_suburb": null,
+        "physical_city": null,
+        "physical_postcode": null,
+        "physical_state": null,
+        "physical_country_id": "CA",
+        "postal_address_1": null,
+        "postal_address_2": null,
+        "postal_suburb": null,
+        "postal_city": null,
+        "postal_state": null,
+        "postal_country_id": "CA",
+        "customer_group_id": "0ac54c19-8c55-11ed-f913-5009010cf9ec",
+        "enable_loyalty": true,
+        "custom_field_1": null,
+        "custom_field_2": null,
+        "custom_field_3": null,
+        "custom_field_4": null,
+        "created_at": "2024-04-17T22:51:50+00:00",
+        "updated_at": "2024-04-17T22:51:50+00:00",
+        "deleted_at": null,
+        "customer_group_ids": [
+          "0ac54c19-8c55-11ed-f913-5009010cf9ec"
+        ],
+        "version": 35493026240,
+        "postal_postcode": null,
+        "time_until_deletion": null,
+        "_exported_at": "2025-09-02T03:18:05.862887"
+      }
+    ]
+  },
+  "brands": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "brands"
+    },
+    "total_records": 213,
+    "samples": [
+      {
+        "id": "0ac54c19-8c39-11ed-fd4a-895bd8d5e952",
+        "name": "Green Toys",
+        "description": null,
+        "deleted_at": null,
+        "version": 26577301593,
+        "_exported_at": "2025-09-02T03:18:04.666171"
+      }
+    ]
+  },
+  "suppliers": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "suppliers"
+    },
+    "total_records": 107,
+    "samples": [
+      {
+        "id": "0b3fce81-7ba3-460f-919f-b594208c222f",
+        "name": "From There to Here",
+        "source": "USER",
+        "description": "",
+        "deleted_at": null,
+        "version": 25158836863,
+        "contact": {
+          "first_name": null,
+          "last_name": null,
+          "company_name": "From There to Here",
+          "phone": null,
+          "mobile": null,
+          "fax": null,
+          "website": null,
+          "email": null,
+          "twitter": null,
+          "postal_address1": null,
+          "postal_address2": null,
+          "postal_suburb": null,
+          "postal_postcode": null,
+          "postal_city": null,
+          "postal_state": null,
+          "postal_country_id": null,
+          "physical_address1": null,
+          "physical_address2": null,
+          "physical_suburb": null,
+          "physical_postcode": null,
+          "physical_city": null,
+          "physical_state": null,
+          "physical_country_id": null
+        },
+        "default_markup": 0.0,
+        "_exported_at": "2025-09-02T03:18:05.337613"
+      }
+    ]
+  },
+  "users": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "users"
+    },
+    "total_records": 7,
+    "samples": [
+      {
+        "id": "983b816b-52c9-4765-afcf-961cc8251464",
+        "username": "seller",
+        "display_name": "Seller",
+        "email": null,
+        "email_verified_at": null,
+        "switch_id": "usi:9ff99545f38d",
+        "account_type": "cashier",
+        "roles": [
+          {
+            "id": "1582882252552515584",
+            "name": "Cashier",
+            "system_role_id": "300"
+          }
+        ],
+        "enabled": true,
+        "restricted_outlet_id": null,
+        "restricted_outlet_ids": [],
+        "permissions": null,
+        "rules": {},
+        "is_primary_user": false,
+        "image_source": "",
+        "images": null,
+        "target_daily": null,
+        "target_weekly": null,
+        "target_monthly": null,
+        "seen_at": "2023-04-15T21:08:45+00:00",
+        "created_at": "2022-12-08T08:03:12+00:00",
+        "updated_at": "2022-12-08T08:03:12+00:00",
+        "deleted_at": null,
+        "time_until_deletion": null,
+        "version": 26046935168,
+        "enabled_mfa": null,
+        "require_password_change": false,
+        "_exported_at": "2025-09-02T03:18:04.553171"
+      }
+    ]
+  },
+  "outlets": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "outlets"
+    },
+    "total_records": 1,
+    "samples": [
+      {
+        "id": "0ac54c19-8c55-11ed-f913-500901158a49",
+        "name": "BC Playthings Edgemont",
+        "default_tax_id": "0ac54c19-8c39-11ed-fd4a-76c3689d4e2b",
+        "currency": "CAD",
+        "display_prices": "exclusive",
+        "time_zone": "America/Vancouver",
+        "physical_suburb": "",
+        "physical_city": "North Vancouver",
+        "physical_postcode": "V7R 2N4",
+        "physical_state": "BC",
+        "email": "info@bcplaythings.com",
+        "phone": "(604) 986-4111",
+        "deleted_at": null,
+        "latitude": "49.3370329",
+        "longitude": "-123.1010385",
+        "version": 41826649471,
+        "physical_address_1": "3044 Edgemont Blvd",
+        "physical_address_2": "",
+        "physical_country_id": "CA",
+        "attributes": [
+          {
+            "key": "add_customer_prompt",
+            "value": "1"
+          },
+          {
+            "key": "low_stock_warning",
+            "value": "1"
+          },
+          {
+            "key": "order_reference",
+            "value": "604"
+          },
+          {
+            "key": "order_reference_prefix",
+            "value": "BCP"
+          },
+          {
+            "key": "return_reference",
+            "value": "1"
+          },
+          {
+            "key": "return_reference_prefix",
+            "value": "RET"
+          }
+        ],
+        "currency_symbol": "$",
+        "_exported_at": "2025-09-02T03:18:04.434374"
+      }
+    ]
+  },
+  "registers": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "registers"
+    },
+    "total_records": 2,
+    "samples": [
+      {
+        "id": "0ac54c19-8c39-11ed-fd4a-76cf3b8cb304",
+        "name": "Online Register",
+        "outlet_id": "0ac54c19-8c55-11ed-f913-500901158a49",
+        "ask_for_note_on_save": 1,
+        "print_note_on_receipt": true,
+        "ask_for_user_on_sale": false,
+        "show_discounts_on_receipts": true,
+        "print_receipt": true,
+        "receipt_template_id": "06e94082-ed39-11ed-fd41-db27391c902b",
+        "email_receipt": true,
+        "invoice_prefix": "",
+        "invoice_suffix": "",
+        "invoice_sequence": 218,
+        "button_layout_id": "a26e5ad3-dd65-11ed-9d41-06e94082ed4f",
+        "register_open_time": "2023-11-24T18:00:13+00:00",
+        "register_close_time": null,
+        "register_open_sequence_id": "06e94082-ed39-11ee-f619-8af350fc9e4d",
+        "deleted_at": null,
+        "attributes": [],
+        "version": 41440754858,
+        "is_open": true,
+        "is_quick_keys_enabled": true,
+        "cash_managed_payment_type_id": "b33c4df4-d70c-4e29-a15e-b89117eee0d2",
+        "_exported_at": "2025-09-02T03:18:04.490799"
+      }
+    ]
+  },
+  "taxes": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "taxes"
+    },
+    "total_records": 6,
+    "samples": [
+      {
+        "id": "0ac54c19-8c39-11ed-fd4a-76c3689d4e2b",
+        "name": "GST+PST",
+        "version": 26045562536,
+        "deleted_at": null,
+        "rates": [
+          {
+            "id": "28b583f4-76c1-11ed-bd4a-0ac54c198c55",
+            "name": "PST",
+            "rate": 0.07,
+            "rules": [],
+            "display_name": "PST"
+          },
+          {
+            "id": "5b01997c-76c3-11ed-bd4a-0ac54c198c55",
+            "name": "GST",
+            "rate": 0.05,
+            "rules": [],
+            "display_name": "GST"
+          }
+        ],
+        "is_default": true,
+        "display_name": "GST+PST",
+        "_exported_at": "2025-09-02T03:18:05.409120"
+      }
+    ]
+  },
+  "payment_types": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "payment_types"
+    },
+    "total_records": 13,
+    "samples": [
+      {
+        "id": "b33c4df4-d70c-4e29-a15e-b89117eee0d2",
+        "name": "_.Cash",
+        "type_id": 1,
+        "gateway": false,
+        "config": {
+          "conceal_cash_totals": false
+        },
+        "version": 28937033595,
+        "disabled": false,
+        "name_changed_by_user": true,
+        "created_at": "2022-10-19T23:51:55Z",
+        "deleted_at": null,
+        "internal": false,
+        "outlet_ids": null,
+        "payment_type": {
+          "id": 1,
+          "name": "Cash",
+          "header": null,
+          "description": null,
+          "logo": null,
+          "badge": "https://vendfrontendassets.global.ssl.fastly.net/images/payments/id-badges/cash-v3.svg",
+          "internal": false,
+          "platforms": [
+            "IPAD",
+            "WEB"
+          ],
+          "category": "cash",
+          "subcategory": "other",
+          "subtext": "Use also for accepting cheques.",
+          "configuration_url": null,
+          "referred_inactive": false,
+          "show_banner": false,
+          "online_only": false
+        },
+        "_exported_at": "2025-09-02T03:18:05.470634"
+      }
+    ]
+  },
+  "customer_groups": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "customer_groups"
+    },
+    "total_records": 9,
+    "samples": [
+      {
+        "id": "0ac54c19-8c39-11ed-fd4a-78d925037aae",
+        "name": "VIP (-10%) Customer",
+        "group_id": "VIP (-10%) Customer-8X4C",
+        "retailer_id": "0ac54c19-8c55-11ed-f913-5009010bd380",
+        "version": 26108286256,
+        "created_at": "2022-12-10T22:22:34+00:00",
+        "updated_at": "2022-12-10T22:22:34+00:00",
+        "deleted_at": null,
+        "_exported_at": "2025-09-02T03:18:04.604504"
+      }
+    ]
+  },
+  "product_types": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "product_types"
+    },
+    "total_records": 26,
+    "samples": [
+      {
+        "id": "1fea014e-bfe4-4623-aa63-f562989f8de1",
+        "name": "No Department",
+        "leaf_category": true,
+        "category_path": [
+          {
+            "id": "1fea014e-bfe4-4623-aa63-f562989f8de1",
+            "name": "No Department"
+          }
+        ],
+        "deleted_at": null,
+        "version": 25158837249,
+        "_exported_at": "2025-09-02T03:18:05.274932"
+      }
+    ]
+  },
+  "inventory": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "inventory"
+    },
+    "total_records": 5000,
+    "samples": [
+      {
+        "id": "7197a82a-74fd-428d-9d1a-8afb4afc4c7e",
+        "outlet_id": "0ac54c19-8c55-11ed-f913-500901158a49",
+        "product_id": "3765780e-32c7-4bda-a16c-18567508edaa",
+        "inventory_level": 0,
+        "current_amount": 0,
+        "version": 36801229852,
+        "deleted_at": null,
+        "average_cost": 5,
+        "reorder_point": null,
+        "reorder_amount": null,
+        "_exported_at": "2025-09-02T03:18:18.680327"
+      }
+    ]
+  },
+  "consignments": {
+    "config": {
+      "id_field": "id",
+      "api_endpoint": "consignments"
+    },
+    "total_records": 433,
+    "samples": [
+      {
+        "id": "8711895d-c245-11ef-9e6f-0242ac14000d",
+        "outlet_id": "0ac54c19-8c55-11ed-f913-500901158a49",
+        "name": "",
+        "due_at": "2024-12-24T22:20:32+00:00",
+        "type": "SUPPLIER",
+        "status": "RECEIVED",
+        "supplier_id": "548c0853-66e2-422d-8cf4-f0bed2c06691",
+        "source_outlet_id": null,
+        "consignment_date": "2024-12-24T22:22:14+00:00",
+        "received_at": "2024-12-24T22:22:15+00:00",
+        "show_inactive": null,
+        "supplier_invoice": null,
+        "reference": "BCP-472",
+        "total_count_gain": null,
+        "total_cost_gain": null,
+        "total_count_loss": null,
+        "total_cost_loss": null,
+        "created_at": "2024-12-24T22:22:14+00:00",
+        "updated_at": "2024-12-24T22:22:14+00:00",
+        "deleted_at": null,
+        "product_count": null,
+        "version": 40034900177,
+        "filters": [],
+        "_exported_at": "2025-09-02T03:18:44.029243"
+      }
+    ]
+  }
+}

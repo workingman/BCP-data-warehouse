@@ -1,0 +1,26 @@
+{
+  "started_at": "2025-09-01T20:18:04.221814",
+  "completed_endpoints": [
+    "outlets",
+    "registers",
+    "users",
+    "customer_groups",
+    "brands",
+    "product_types",
+    "suppliers",
+    "taxes",
+    "payment_types",
+    "customers",
+    "products",
+    "inventory",
+    "sales",
+    "price_books",
+    "promotions",
+    "consignments",
+    "gift_cards"
+  ],
+  "partial_progress": {},
+  "last_updated": "2025-09-01T20:18:44.871208",
+  "export_complete": true,
+  "completed_at": "2025-09-01T20:18:44.871205"
+}
